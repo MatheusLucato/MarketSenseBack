@@ -17,9 +17,6 @@ public class Usuario {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "EMAIL")
-    private String email;
-
     @Column(name = "SENHA")
     private String senha;
 }

@@ -24,6 +24,9 @@ public class UsuarioService {
     public void excluir(Integer id) {
         usuarioRepository.deleteById(id);
     }
+    public Usuario findById(Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
 
 
 }

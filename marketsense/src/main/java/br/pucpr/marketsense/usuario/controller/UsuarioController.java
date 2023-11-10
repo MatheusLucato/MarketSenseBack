@@ -4,6 +4,7 @@ import br.pucpr.marketsense.usuario.model.*;
 import br.pucpr.marketsense.usuario.model.entity.*;
 import br.pucpr.marketsense.usuario.service.*;
 import jakarta.validation.*;
+import jakarta.validation.constraints.NotNull;
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -25,6 +26,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = this.modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvar(usuario);
+        usuarioDTO.setId(usuario.getId());
         return new ResponseEntity(usuarioDTO, HttpStatus.CREATED);
     }
 
@@ -34,4 +36,25 @@ public class UsuarioController {
         return usuarios.stream().map(usuario -> modelMapper.map(usuario, UsuarioDTO.class)).
                 collect(Collectors.toList());
     }
+
+    @DeleteMapping("/{usuarioId}")
+    public ResponseEntity<UsuarioDTO> excluir(@PathVariable Integer usuarioId) {
+        Usuario userDelete = this.modelMapper.map(usuarioService.findById(usuarioId), Usuario.class);
+        if (userDelete != null && userDelete.getId() != null) {
+            usuarioService.excluir(userDelete.getId());
+        }
+        return new ResponseEntity(userDelete, HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizar(@Valid @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuarioParam = this.modelMapper.map(usuarioDTO, Usuario.class);
+        Usuario usuario = usuarioService.findById(usuarioDTO.getId());
+        usuario.setNome(usuarioParam.getNome());
+        usuario.setSenha(usuarioParam.getSenha());
+        usuarioService.salvar(usuario);
+        return new ResponseEntity(usuarioDTO, HttpStatus.OK);
+    }
+
+
 }
