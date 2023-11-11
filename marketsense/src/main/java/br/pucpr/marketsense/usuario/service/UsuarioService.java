@@ -27,6 +27,9 @@ public class UsuarioService {
     public Usuario findById(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
+    public Usuario encontrarUsuarioPorUsernameESenha(String username, String senha) {
+        return usuarioRepository.findByNomeAndSenha(username, senha).orElse(null);
+    }
 
 
 }

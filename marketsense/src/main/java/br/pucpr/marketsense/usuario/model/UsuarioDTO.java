@@ -1,6 +1,5 @@
 package br.pucpr.marketsense.usuario.model;
 
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data

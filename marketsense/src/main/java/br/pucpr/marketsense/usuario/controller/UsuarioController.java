@@ -4,7 +4,6 @@ import br.pucpr.marketsense.usuario.model.*;
 import br.pucpr.marketsense.usuario.model.entity.*;
 import br.pucpr.marketsense.usuario.service.*;
 import jakarta.validation.*;
-import jakarta.validation.constraints.NotNull;
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
