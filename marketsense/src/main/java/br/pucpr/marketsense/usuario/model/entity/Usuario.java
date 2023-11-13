@@ -17,6 +17,9 @@ public class Usuario {
     @Column(name = "NOME")
     private String nome;
 
+    @Column(name = "ADMIN")
+    private Boolean admin;
+
     @Column(name = "SENHA")
     private String senha;
 }

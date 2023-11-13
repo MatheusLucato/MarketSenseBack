@@ -51,6 +51,7 @@ public class UsuarioController {
         Usuario usuario = usuarioService.findById(usuarioDTO.getId());
         usuario.setNome(usuarioParam.getNome());
         usuario.setSenha(usuarioParam.getSenha());
+        usuario.setAdmin(usuarioParam.getAdmin());
         usuarioService.salvar(usuario);
         return new ResponseEntity(usuarioDTO, HttpStatus.OK);
     }
