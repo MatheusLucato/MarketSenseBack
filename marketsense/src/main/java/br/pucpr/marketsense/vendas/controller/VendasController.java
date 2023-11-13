@@ -57,6 +57,20 @@ public class VendasController {
                 collect(Collectors.toList());
     }
 
+    @GetMapping("/produtos")
+    public List<VendasProdutosDTO> listarVendasProdutos() {
+
+        List<VendasProdutos> vendasProdutosList = vendasProdutosService.listar();
+
+        List<VendasProdutosDTO> vendasProdutosDTOList = new ArrayList<>();
+        for (VendasProdutos vendasProdutos : vendasProdutosList) {
+            VendasProdutosDTO vendasProdutosDTO = new VendasProdutosDTO(vendasProdutos.getProduto().getId(), vendasProdutos.getVenda().getId());
+            vendasProdutosDTOList.add(vendasProdutosDTO);
+        }
+
+        return vendasProdutosDTOList;
+    }
+
     @GetMapping("/{vendaId}")
     public List<ProdutoDTO> listarProdutosporVenda(@PathVariable Integer vendaId) {
         List<String> produtosId = vendasProdutosService.listarProdutosPorVenda(vendaId);
